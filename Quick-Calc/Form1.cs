@@ -2,15 +2,15 @@ namespace Quick_Calc
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        private Calculator calc = new Calculator();
+        private string operation = string.Empty;
+        private bool enterValue = false;
+
         public Form()
         {
             InitializeComponent();
         }
 
-        string operation = string.Empty;
-        string secondNum;
-        bool enterValue = false;
-        int result = 0;
 
         /// <summary>
         /// Display the numbers
@@ -18,28 +18,24 @@ namespace Quick_Calc
         private void BtnNum_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-
             if (textDisplay1.Text == "0" || enterValue)
                 textDisplay1.Text = "";
-
             enterValue = false;
             textDisplay1.Text += button.Text;
         }
+
 
         /// <summary>
         /// Display the first number and the operation
         /// </summary>
         private void Btn_MathOp_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-
             if (textDisplay1.Text == "") return;
-
-            result = int.Parse(textDisplay1.Text);
+            calc.Result = int.Parse(textDisplay1.Text);
+            Button button = (Button)sender;
             operation = button.Text;
             enterValue = true;
-
-            textDisplay2.Text = result + " " + operation;
+            textDisplay2.Text = $"{calc.Result} {operation}";
         }
 
         /// <summary>
@@ -47,38 +43,20 @@ namespace Quick_Calc
         /// </summary>
         private void buttonEqual_Click(object sender, EventArgs e)
         {
-            if (textDisplay1.Text == "" || operation == "") return;
-
-            secondNum = textDisplay1.Text;
-            textDisplay2.Text = $"{result} {operation} {secondNum} =";
-
-            int second = int.Parse(secondNum);
-
-            switch (operation)
+            if (textDisplay1.Text == "" || string.IsNullOrEmpty(operation)) return;
+            int second = int.Parse(textDisplay1.Text);
+            try
             {
-                case "+":
-                    result += second;
-                    break;
-
-                case "-":
-                    result -= second;
-                    break;
-
-                case "×":
-                    result *= second;
-                    break;
-
-                case "÷":
-                    if (second == 0) // div by zero check
-                    {
-                        MessageBox.Show("Cannot divide by zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    result /= second;
-                    break;
+                calc.Result = calc.Calculate(calc.Result, second, operation);
+            }
+            catch (DivideByZeroException)
+            {
+                MessageBox.Show("Cannot divide by zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            textDisplay1.Text = result.ToString();
+            textDisplay1.Text = calc.Result.ToString();
+            textDisplay2.Text += $" {second} =";
             operation = string.Empty;
             enterValue = true;
         }
@@ -88,9 +66,9 @@ namespace Quick_Calc
         /// </summary>
         private void buttonC_Click(object sender, EventArgs e)
         {
+            calc.Clear();
             textDisplay1.Text = "0";
             textDisplay2.Clear();
-            result = 0;
             operation = string.Empty;
             enterValue = false;
         }
