@@ -327,6 +327,7 @@
             textDisplay2.Size = new Size(205, 34);
             textDisplay2.TabIndex = 12;
             textDisplay2.Text = "0";
+            textDisplay2.KeyPress += textDisplay_KeyPress;
             // 
             // textDisplay1
             // 
@@ -340,6 +341,7 @@
             textDisplay1.Size = new Size(205, 34);
             textDisplay1.TabIndex = 13;
             textDisplay1.Text = "0";
+            textDisplay1.KeyPress += textDisplay_KeyPress;
             // 
             // Form
             // 
