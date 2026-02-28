@@ -18,10 +18,21 @@ namespace Quick_Calc
         private void BtnNum_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+
             if (textDisplay1.Text == "0" || enterValue)
                 textDisplay1.Text = "";
+
+            string newText = textDisplay1.Text + button.Text;
+
+            // block input if number > 100000
+            if (int.TryParse(newText, out int newNumber) && newNumber > 100_000)
+            {
+                MessageBox.Show("Maximum input is 100000", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             enterValue = false;
-            textDisplay1.Text += button.Text;
+            textDisplay1.Text = newText;
         }
 
 
