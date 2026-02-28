@@ -45,8 +45,8 @@
             buttonSub = new Button();
             buttonMul = new Button();
             buttonAdd = new Button();
-            textDisplay2 = new TextBox();
             textDisplay1 = new TextBox();
+            textDisplay2 = new TextBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -315,20 +315,6 @@
             buttonAdd.UseVisualStyleBackColor = false;
             buttonAdd.Click += Btn_MathOp_Click;
             // 
-            // textDisplay2
-            // 
-            textDisplay2.BackColor = Color.SteelBlue;
-            textDisplay2.BorderStyle = BorderStyle.FixedSingle;
-            textDisplay2.Dock = DockStyle.Top;
-            textDisplay2.Font = new Font("Yu Gothic UI", 12F);
-            textDisplay2.ForeColor = Color.AliceBlue;
-            textDisplay2.Location = new Point(0, 0);
-            textDisplay2.Name = "textDisplay2";
-            textDisplay2.Size = new Size(205, 34);
-            textDisplay2.TabIndex = 12;
-            textDisplay2.Text = "0";
-            textDisplay2.KeyPress += textDisplay_KeyPress;
-            // 
             // textDisplay1
             // 
             textDisplay1.BackColor = Color.SteelBlue;
@@ -336,12 +322,26 @@
             textDisplay1.Dock = DockStyle.Top;
             textDisplay1.Font = new Font("Yu Gothic UI", 12F);
             textDisplay1.ForeColor = Color.AliceBlue;
-            textDisplay1.Location = new Point(0, 34);
+            textDisplay1.Location = new Point(0, 0);
             textDisplay1.Name = "textDisplay1";
             textDisplay1.Size = new Size(205, 34);
-            textDisplay1.TabIndex = 13;
+            textDisplay1.TabIndex = 12;
             textDisplay1.Text = "0";
             textDisplay1.KeyPress += textDisplay_KeyPress;
+            // 
+            // textDisplay2
+            // 
+            textDisplay2.BackColor = Color.SteelBlue;
+            textDisplay2.BorderStyle = BorderStyle.FixedSingle;
+            textDisplay2.Dock = DockStyle.Top;
+            textDisplay2.Font = new Font("Yu Gothic UI", 12F);
+            textDisplay2.ForeColor = Color.AliceBlue;
+            textDisplay2.Location = new Point(0, 34);
+            textDisplay2.Name = "textDisplay2";
+            textDisplay2.Size = new Size(205, 34);
+            textDisplay2.TabIndex = 13;
+            textDisplay2.Text = "0";
+            textDisplay2.KeyPress += textDisplay_KeyPress;
             // 
             // Form
             // 
@@ -349,8 +349,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SteelBlue;
             ClientSize = new Size(205, 269);
-            Controls.Add(textDisplay1);
             Controls.Add(textDisplay2);
+            Controls.Add(textDisplay1);
             Controls.Add(panel1);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -379,7 +379,7 @@
         private Button buttonMul;
         private Button buttonC;
         private Button buttonEqual;
-        private TextBox textDisplay2;
         private TextBox textDisplay1;
+        private TextBox textDisplay2;
     }
 }
